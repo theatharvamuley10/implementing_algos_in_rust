@@ -1,4 +1,5 @@
 mod binary_search;
+mod fibonacci;
 mod greedy;
 mod quicksort;
 
@@ -7,6 +8,7 @@ fn main() {
     _quicksort();
     _binary_search();
     _greedy_set_cover();
+    _fibonacci();
 }
 
 fn _quicksort() {
@@ -53,4 +55,21 @@ fn _greedy_set_cover() {
     println!("Coverage of station four: {:?}", stations["kfour"]);
     println!("Coverage of station five: {:?}", stations["kfive"]);
     println!("--> Selected stations: {:?}", result);
+}
+
+fn _fibonacci() {
+    println!("\n================\n Fibonacci \n================");
+
+    println!("Printing first 10 fibonacci numbers");
+    fibonacci::print_fibonacci();
+
+    let n = 5;
+    println!(
+        "\nThe {n}th fibonacci using recursion is: {}",
+        fibonacci::find_nth_fibonacci_recursion(n)
+    );
+    println!(
+        "The {n}th fibonacci using loop is: {}",
+        fibonacci::find_nth_fibonacci_loop(n)
+    );
 }

@@ -4,15 +4,15 @@ pub fn greedy_set_cover(
     states_needed: &HashSet<&str>,
     stations: &HashMap<&str, HashSet<&str>>,
 ) -> HashSet<String> {
-    let mut states_needed = states_needed.clone();
+    let mut states_uncovered = states_needed.clone();
     let mut final_stations: HashSet<String> = HashSet::new();
 
-    while !states_needed.is_empty() {
+    while !states_uncovered.is_empty() {
         let mut best_station: Option<&str> = None;
         let mut states_covered: HashSet<&str> = HashSet::new();
 
         for (station, states_for_station) in stations.iter() {
-            let covered: HashSet<&str> = states_needed
+            let covered: HashSet<&str> = states_uncovered
                 .intersection(states_for_station)
                 .cloned()
                 .collect();
@@ -26,7 +26,7 @@ pub fn greedy_set_cover(
         if let Some(station) = best_station {
             final_stations.insert(station.to_string());
             for state in states_covered {
-                states_needed.remove(state);
+                states_uncovered.remove(state);
             }
         } else {
             break; // No progress possible (incomplete coverage)
